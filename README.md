@@ -42,3 +42,23 @@ nnoremap <silent> ,r :QuickRun -mode n -runner vimproc:updatetime=10 -hook/unitt
 4. For example, move cursor next to def test_foo(self) line.
 5. Type `,r` and then execute QuickRun automatically.
 6. QuickRun output only test_foo() test result.
+
+Test runners
+------------
+
+This plugin required awesome testing flamework/runner to run.
+
+- Python
+  - nose(Python unittesting flamework)[http://nose.readthedocs.org/en/latest/]
+- PHP
+  - Stagehand_TestRunner(PHP continuous test runner)[http://piece-framework.com/projects/stagehand-testrunner/wiki]
+
+
+Example QuickRun configs
+------------------------
+
+```viml
+let g:quickrun_config = {}
+let g:quickrun_config['php.unit']    = {'command': 'testrunner', 'cmdopt': 'phpunit'}
+let g:quickrun_config['python.unit'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
+```
