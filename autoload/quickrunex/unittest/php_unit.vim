@@ -29,7 +29,6 @@ function! quickrunex#unittest#php_unit#run(session, context)
   let filename = bufname('%')
 
   let cmdopt = a:session['config']['cmdopt'] . ' --test-method ' . method . ' ' . filename
-  echomsg cmdopt
 
   let a:session['config']['cmdopt'] = cmdopt
 endfunction
