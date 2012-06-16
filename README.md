@@ -50,6 +50,7 @@ This plugin required awesome testing flamework/runner to run.
 
 - Python
   - [nose(Python unittesting flamework)](http://nose.readthedocs.org/en/latest/)
+  - [pyt.test(Python unittesting flamework)](http://pytest.org/latest/index.html)
 - PHP
   - [Stagehand_TestRunner:PHP continuous test runner](http://piece-framework.com/projects/stagehand-testrunner/wiki)
 - RSpec
@@ -60,8 +61,18 @@ Example QuickRun configs
 ------------------------
 
 ```viml
+augroup QuickRunUnitTest
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *test.php setlocal filetype=php.unit
+  " Choose UnitTest or py.test.
+  autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.unit
+  "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.pytest
+  autocmd BufWinEnter,BufNewFile *.t setlocal filetype=perl.unit
+  autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
+augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['php.unit']    = {'command': 'testrunner', 'cmdopt': 'phpunit'}
 let g:quickrun_config['python.unit'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
+let g:quickrun_config['python.pytest'] = {'command': 'py.test', 'cmdopt': '-v'}
 let g:quickrun_config['ruby.rspec']  = {'command': 'rspec', 'cmdopt': '-f d'}
 ```
