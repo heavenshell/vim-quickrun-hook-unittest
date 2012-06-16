@@ -49,9 +49,9 @@ Test runners
 This plugin required awesome testing flamework/runner to run.
 
 - Python
-  - nose(Python unittesting flamework)[http://nose.readthedocs.org/en/latest/]
+  - (nose:Python unittesting flamework)[http://nose.readthedocs.org/en/latest/]
 - PHP
-  - Stagehand_TestRunner(PHP continuous test runner)[http://piece-framework.com/projects/stagehand-testrunner/wiki]
+  - (Stagehand_TestRunner:PHP continuous test runner)[http://piece-framework.com/projects/stagehand-testrunner/wiki]
 
 
 Example QuickRun configs
