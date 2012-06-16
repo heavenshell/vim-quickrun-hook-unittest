@@ -1,4 +1,4 @@
-" File: python_unittest.vim
+" File: python_unit.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
 " Version: 0.0.1
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
