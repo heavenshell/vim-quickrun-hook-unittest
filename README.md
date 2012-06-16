@@ -19,8 +19,14 @@ class TestFoo(TestCase):
 QuickRun execute all tests.
 But if you want to run only test_bar() method.
 
-Put this hook scripts into your $VIMRUNTIME.
+Install
+-------
 
+Install the distributed files into Vim runtime directory which is usually
+~/.vim/, or $HOME/vimfiles on Windows.
+
+If you install pathogen that provided from Tim Pope, you should extract the
+file into 'bundle' directory.
 
 Usage
 -----
@@ -34,5 +40,5 @@ nnoremap <silent> ,r :QuickRun -mode n -runner vimproc:updatetime=10 -hook/unitt
 2. Open your unittest file.
 3. Move cursor to test method scope.
 4. For example, move cursor next to def test_foo(self) line.
-5. Type ,r and then execute QuickRun automatically.
+5. Type `,r` and then execute QuickRun automatically.
 6. QuickRun output only test_foo() test result.
