@@ -10,29 +10,77 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! quickrunex#unittest#python_unit#run(session, context)
-  let lineno = line('.')
-  let line = getline('.')
+  let filepath = expand('%:p')
+  let line = s:get_signeture()
 
-  if line =~ '^\s*def\stest_*.'
-    let defname = line
-  else
-    let pos = search('^\s*def\stest_*.', 'bwWn')
-    let defname = getline(pos)
-    if pos == 0
-      return
-    endif
+  if s:is_test_class(line)
+    let classname = s:pick_classname(line)
+    let cmdopt    = printf('%s:%s', filepath, classname)
+  elseif s:is_test_func(line)
+    let defname = s:pick_defname(line)
+    let cmdopt  = printf('%s:%s', filepath, defname)
+  elseif s:is_test_method(line)
+    let defname   = s:pick_defname(line)
+    let classname = s:search_classname()
+    let cmdopt    = printf('%s:%s.%s', filepath, classname, defname)
+  elseif s:is_method(line) " not test method.
+    let classname = s:search_classname()
+    let cmdopt = printf('%s:%s', filepath, classname)
+  else "not test function or class. all test.
+    let cmdopt = filepath
   endif
 
-  let defname = substitute(defname, '(.*$', '', '')
-  let defname = substitute(defname, '^\s*def\s\|^def\s', '', '')
-  let classpos = search('^class\sTest*.', 'bwWn')
-  let classname = getline(classpos)
-  let classname = substitute(classname, '(.*$', '', '')
-  let classname = substitute(classname, '^class\s', '', '')
-  let filepath = expand('%:p')
-  let cmdopt = printf('%s:%s.%s', filepath, classname, defname)
-
   let a:session['config']['exec'] = '%c %o' . ' ' . cmdopt
+endfunction
+
+function! s:get_signeture()
+  let line = getline('.')
+
+  if line !~# '^\s*def\s\|^class\s'
+    if line =~# '\s*@'
+      let pos = search('^\s*def\s\|^class\s', 'Wn')
+      let line = getline(pos)
+    else
+      let pos = search('^\s*def\s\|^class\s', 'bWn')
+      let line = getline(pos)
+    endif
+  endif
+  return line
+endfunction
+
+function! s:is_test_class(line)
+  return a:line =~# '^class\s\+\S*[Tt]est.*'
+endfunction
+
+function! s:is_test_func(line)
+  return a:line =~# '^def\s\+\(\S*[^[:alnum:]-.]\)\?[Tt]est.*'
+endfunction
+
+function! s:is_test_method(line)
+  return a:line =~# '^\s\+def\s\+\(\S*[^[:alnum:]-.]\)\?[Tt]est.*'
+endfunction
+
+function! s:is_method(line)
+  return a:line =~# '^\s\+def\s'
+endfunction
+
+function! s:search_classname()
+  let classpos = search('^class\s', 'bWn')
+  let classname = getline(classpos)
+  let classname = s:pick_classname(classname)
+  return classname
+endfunction
+
+function! s:pick_classname(string)
+  let classname = substitute(a:string, '(.*$', '', '')
+  let classname = substitute(classname, '^class\s\+', '', '')
+  return classname
+endfunction
+
+function! s:pick_defname(string)
+  let defname = substitute(a:string, '(.*$', '', '')
+  let defname = substitute(defname, '^\s*def\s\+', '', '')
+  return defname
 endfunction
 
 let &cpo = s:save_cpo
