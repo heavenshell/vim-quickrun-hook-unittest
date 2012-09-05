@@ -46,11 +46,11 @@ nnoremap <silent> ,r :QuickRun -mode n -runner vimproc:updatetime=10 -hook/unitt
 Test runners
 ------------
 
-This plugin required awesome testing flamework/runner to run.
+This plugin required awesome testing framework/runner to run.
 
 - Python
-  - [nose(Python unittesting flamework)](http://nose.readthedocs.org/en/latest/)
-  - [pyt.test(Python unittesting flamework)](http://pytest.org/latest/index.html)
+  - [nose(Python unittesting framework)](http://nose.readthedocs.org/en/latest/)
+  - [pyt.test(Python unittesting framework)](http://pytest.org/latest/index.html)
 - PHP
   - [Stagehand_TestRunner:PHP continuous test runner](http://piece-framework.com/projects/stagehand-testrunner/wiki)
 - RSpec
