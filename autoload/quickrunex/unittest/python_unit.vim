@@ -30,7 +30,7 @@ function! quickrunex#unittest#python_unit#run(session, context)
     let cmdopt = filepath
   endif
 
-  let a:session['config']['exec'] = '%c %o' . ' ' . cmdopt
+  let a:session['config']['exec'] = ['%c %o' . ' ' . cmdopt]
 endfunction
 
 function! s:get_signeture()
