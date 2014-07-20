@@ -75,4 +75,5 @@ let g:quickrun_config['php.unit']    = {'command': 'testrunner', 'cmdopt': 'phpu
 let g:quickrun_config['python.unit'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
 let g:quickrun_config['python.pytest'] = {'command': 'py.test', 'cmdopt': '-v'}
 let g:quickrun_config['ruby.rspec']  = {'command': 'rspec', 'cmdopt': '-f d'}
+let g:quickrun_config['go.test']     = {'command': 'go', 'cmdopt': 'test -v'}
 ```
