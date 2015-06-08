@@ -17,7 +17,7 @@ class TestFoo(TestCase):
 ```
 
 QuickRun execute all tests.
-But if you want to run only test_bar() method.
+But if you want to run only `test_bar()` method.
 
 Install
 -------
