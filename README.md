@@ -70,6 +70,7 @@ augroup QuickRunUnitTest
   autocmd BufWinEnter,BufNewFile *.t       setlocal filetype=perl.unit
   autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
+  autocmd BufWinEnter,BufNewFile *_test.go setlocal filetype=go.test
 augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['php.unit']      = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
