@@ -65,7 +65,7 @@ Example QuickRun configs
 augroup QuickRunUnitTest
   autocmd!
   autocmd BufWinEnter,BufNewFile *test.php setlocal filetype=php.unit
-  " Choose UnitTest or py.test.
+  " Choose UnitTest, py.test or Django.
   autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.unit
   "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.pytest
   "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.django
