@@ -50,7 +50,8 @@ This plugin required awesome testing framework/runner to run.
 
 - Python
   - [nose(Python unittesting framework)](http://nose.readthedocs.org/en/latest/)
-  - [pyt.test(Python unittesting framework)](http://pytest.org/latest/index.html)
+  - [py.test(Python unittesting framework)](http://pytest.org/latest/index.html)
+  - [Django](https://docs.djangoproject.com/en/1.10/topics/testing/overview/#running-tests)
 - PHP
   - [Stagehand_TestRunner:PHP continuous test runner](http://piece-framework.com/projects/stagehand-testrunner/wiki)
 - Ruby
@@ -67,6 +68,7 @@ augroup QuickRunUnitTest
   " Choose UnitTest or py.test.
   autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.unit
   "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.pytest
+  "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.django
   autocmd BufWinEnter,BufNewFile *.t       setlocal filetype=perl.unit
   autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
@@ -76,6 +78,7 @@ let g:quickrun_config = {}
 let g:quickrun_config['php.unit']      = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
 let g:quickrun_config['python.unit']   = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
 let g:quickrun_config['python.pytest'] = { 'command': 'py.test',    'cmdopt': '-v'      }
+let g:quickrun_config['python.django'] = { 'command': 'python' }
 let g:quickrun_config['ruby.rspec']    = { 'command': 'rspec',      'cmdopt': '-f d'    }
 let g:quickrun_config['ruby.minitest'] = { 'command': 'ruby'                            }
 let g:quickrun_config['go.test']       = { 'command': 'go',         'cmdopt': 'test -v' }
