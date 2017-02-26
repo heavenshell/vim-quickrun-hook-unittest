@@ -57,6 +57,7 @@ This plugin required awesome testing framework/runner to run.
 - Ruby
   - [RSpec: Ruby testing tool for Behaviour-Driven Development](http://rspec.info/)
   - [minitest/unit: a small and incredibly fast unit testing framework](https://github.com/seattlerb/minitest)
+  - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
 
 Example QuickRun configs
 ------------------------
@@ -73,13 +74,15 @@ augroup QuickRunUnitTest
   autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
   autocmd BufWinEnter,BufNewFile *_test.go setlocal filetype=go.test
+  autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
 augroup END
 let g:quickrun_config = {}
-let g:quickrun_config['php.unit']      = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
-let g:quickrun_config['python.unit']   = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
-let g:quickrun_config['python.pytest'] = { 'command': 'py.test',    'cmdopt': '-v'      }
-let g:quickrun_config['python.django'] = { 'command': 'python' }
-let g:quickrun_config['ruby.rspec']    = { 'command': 'rspec',      'cmdopt': '-f d'    }
-let g:quickrun_config['ruby.minitest'] = { 'command': 'ruby'                            }
-let g:quickrun_config['go.test']       = { 'command': 'go',         'cmdopt': 'test -v' }
+let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
+let g:quickrun_config['python.unit']      = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
+let g:quickrun_config['python.pytest']    = { 'command': 'py.test',    'cmdopt': '-v'      }
+let g:quickrun_config['python.django']    = { 'command': 'python' }
+let g:quickrun_config['ruby.rspec']       = { 'command': 'rspec',      'cmdopt': '-f d'    }
+let g:quickrun_config['ruby.minitest']    = { 'command': 'ruby'                            }
+let g:quickrun_config['go.test']          = { 'command': 'go',         'cmdopt': 'test -v' }
+let g:quickrun_config['javascript.mocha'] = { 'command': 'mocha' }
 ```
