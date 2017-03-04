@@ -64,12 +64,16 @@ function! quickrunex#unittest#javascript_mocha#run(session, context)
   endif
 
   let line = s:get_signeture()
-  let pattern = s:pick_name(line)
   let file = expand('%:p')
   let optpath = s:detect_optfile()
 
   let a:session['config']['command'] = s:bin
-  let cmdopt = a:session['config']['cmdopt'] . '--opts ' . optpath. ' -g ' . pattern . ' ' . file
+  if line == ''
+    let cmdopt = a:session['config']['cmdopt'] . '--opts ' . optpath. ' ' . file
+  else
+    let pattern = s:pick_name(line)
+    let cmdopt = a:session['config']['cmdopt'] . '--opts ' . optpath. ' -g ' . pattern . ' ' . file
+  endif
 
   let a:session['config']['cmdopt'] = cmdopt
   let a:session['config']['exec'] = ['%c %o %a']
