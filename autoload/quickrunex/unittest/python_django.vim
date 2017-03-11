@@ -41,10 +41,10 @@ function! quickrunex#unittest#python_django#run(session, context)
     let cmdopt = filepath
   endif
 
-  let cmdopt = printf(' test --verbosity=1 --parallel=2 %s', cmdopt)
+  let a:session['config']['cmdopt'] = printf('%s %s', a:session['config']['cmdopt'], cmdopt)
 
   let a:session['config']['command'] = file
-  let a:session['config']['exec'] = ['%c %o' . ' ' . cmdopt]
+  let a:session['config']['exec'] = ['%c %o %a']
 endfunction
 
 function! s:get_manage_py()
