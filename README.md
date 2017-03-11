@@ -34,7 +34,7 @@ Usage
 1. Add below example to your .vimrc or _vimrc.
 
 ```viml
-nnoremap <silent> ,r :QuickRun -mode n -runner vimproc:updatetime=10 -hook/unittest/enable 1<CR>
+nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
 ```
 
 2. Open your unittest file.
