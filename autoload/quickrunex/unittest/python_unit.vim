@@ -29,8 +29,8 @@ function! quickrunex#unittest#python_unit#run(session, context)
   else "not test function or class. all test.
     let cmdopt = filepath
   endif
-
-  let a:session['config']['exec'] = ['%c %o' . ' ' . cmdopt]
+  let a:session['config']['cmdopt'] = printf('%s %s', a:session['config']['cmdopt'], cmdopt)
+  let a:session['config']['exec'] = ['%c %o']
 endfunction
 
 function! s:get_signeture()
