@@ -58,6 +58,7 @@ This plugin required awesome testing framework/runner to run.
   - [RSpec: Ruby testing tool for Behaviour-Driven Development](http://rspec.info/)
   - [minitest/unit: a small and incredibly fast unit testing framework](https://github.com/seattlerb/minitest)
   - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
+  - [Jest - Delightful JavaScript Testing](http://facebook.github.io/jest/)
 
 Example QuickRun configs
 ------------------------
@@ -75,6 +76,7 @@ augroup QuickRunUnitTest
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
   autocmd BufWinEnter,BufNewFile *_test.go setlocal filetype=go.test
   autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
+  "autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.jest
 augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
@@ -85,4 +87,5 @@ let g:quickrun_config['ruby.rspec']       = { 'command': 'rspec',      'cmdopt':
 let g:quickrun_config['ruby.minitest']    = { 'command': 'ruby'                            }
 let g:quickrun_config['go.test']          = { 'command': 'go',         'cmdopt': 'test -v' }
 let g:quickrun_config['javascript.mocha'] = { 'command': 'mocha' }
+let g:quickrun_config['javascript.mocha'] = { 'command': 'jest' }
 ```
