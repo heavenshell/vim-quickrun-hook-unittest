@@ -10,6 +10,7 @@ set cpo&vim
 
 let s:bin = ''
 let s:current_path = ''
+let s:src_path = ''
 let s:opt_file_relative_flag = 0
 
 function! s:get_signeture()
@@ -43,6 +44,16 @@ function! s:detect_bin()
   return jest
 endfunction
 
+function! s:coverage()
+  if s:src_path == ''
+    let current_path = expand('%:p')
+    let s:src_path = finddir('src', current_path . ';')
+  endif
+
+  return ' --coverage=!' . s:src_path . '*/**.js'
+
+endfunction
+
 function! s:pick_name(string)
   let name = matchstr(a:string, "'.*'", 0)
   return name
@@ -63,6 +74,7 @@ function! quickrunex#unittest#javascript_jest#run(session, context)
     let pattern = s:pick_name(line)
     let cmdopt = ' -t ' . pattern . ' ' . file
   endi
+  let cmdopt .= s:coverage()
   " let cmdopt = cmdopt . ' --clearCache'
 
   let a:session['config']['command'] = s:bin
