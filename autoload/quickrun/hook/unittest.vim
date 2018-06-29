@@ -24,5 +24,16 @@ function! s:hook.on_module_loaded(session, context)
   endif
 endfunction
 
+function! s:hook.on_finish(...)
+  if self.config.enable == 1
+    try
+      let name = substitute(&filetype, '\.', '_', 'g')
+      call quickrunex#unittest#{name}#finish()
+    catch
+      echomsg 'foo'
+    endtry
+  endif
+endfunction
+
 let &cpo = s:save_cpo
 unlet s:save_cpo

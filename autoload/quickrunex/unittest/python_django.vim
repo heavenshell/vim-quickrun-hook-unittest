@@ -9,9 +9,19 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:current = ''
+
 function! quickrunex#unittest#python_django#run(session, context)
   let file = s:get_manage_py()
   let root = fnamemodify(file, ':p:h')
+  let base = root
+
+  if exists('+autochdir') && &autochdir
+    let s:current = getcwd()
+    set noautochdir
+    execute ':lcd ' . base
+  endif
+
   let root = substitute(root, '\/', '\.', '')
 
   " Extract `${package_name}.${class_name}.${method_name}`.
@@ -42,9 +52,13 @@ function! quickrunex#unittest#python_django#run(session, context)
   endif
 
   let a:session['config']['cmdopt'] = printf('%s %s', a:session['config']['cmdopt'], cmdopt)
-
   let a:session['config']['command'] = file
   let a:session['config']['exec'] = ['%c %o %a']
+endfunction
+
+function! quickrunex#unittest#python_django#finish()
+  set autochdir
+  execute ':cd ' . s:current
 endfunction
 
 function! s:get_manage_py()
