@@ -22,31 +22,36 @@ function! quickrunex#unittest#python_django#run(session, context)
     execute ':lcd ' . base
   endif
 
-  let root = substitute(root, '\/', '\.', '')
-
-  " Extract `${package_name}.${class_name}.${method_name}`.
   let filepath = expand('%:p')
-  let filepath = substitute(filepath, '\/', '\.', '')
-  let filepath = substitute(filepath, root, '', 'g')
-  let filepath = substitute(filepath, '\/', '\.', 'g')
-  let filepath = substitute(filepath, '\.', '', '1')
-  let filepath = fnamemodify(filepath, ':t:r')
-
   let line = s:get_signeture()
+  let test_fw = get(a:session['config'], 'test_fw', 'unittest')
+  let delimiter = '.'
+
+  if test_fw == 'pytest'
+    let delimiter = '::'
+  else
+    let root = substitute(root, '\/', '\.', '')
+    " Extract `${package_name}.${class_name}.${method_name}`.
+    let filepath = substitute(filepath, '\/', '\.', '')
+    let filepath = substitute(filepath, root, '', 'g')
+    let filepath = substitute(filepath, '\/', '\.', 'g')
+    let filepath = substitute(filepath, '\.', '', '1')
+    let filepath = fnamemodify(filepath, ':t:r')
+  endif
 
   if s:is_test_class(line)
     let classname = s:pick_classname(line)
-    let cmdopt    = printf('%s.%s', filepath, classname)
+    let cmdopt    = printf('%s%s%s', filepath, delimiter, classname)
   elseif s:is_test_func(line)
     let defname = s:pick_defname(line)
-    let cmdopt  = printf('%s.%s', filepath, defname)
+    let cmdopt  = printf('%s%s%s', filepath, delimiter, defname)
   elseif s:is_test_method(line)
     let defname   = s:pick_defname(line)
     let classname = s:search_classname()
-    let cmdopt    = printf('%s.%s.%s', filepath, classname, defname)
+    let cmdopt    = printf('%s%s%s%s%s', filepath, delimiter, classname, delimiter, defname)
   elseif s:is_method(line) " not test method.
     let classname = s:search_classname()
-    let cmdopt = printf('%s.%s', filepath, classname)
+    let cmdopt = printf('%s%s%s', filepath, delimiter, classname)
   else "not test function or class. all test.
     let cmdopt = filepath
   endif
