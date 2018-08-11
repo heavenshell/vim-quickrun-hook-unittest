@@ -83,6 +83,8 @@ let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt':
 let g:quickrun_config['python.unit']      = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
 let g:quickrun_config['python.pytest']    = { 'command': 'py.test',    'cmdopt': '-v'      }
 let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt: 'test --pararell=2 --keepdb -v2'}
+" pytest-django
+" let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt: 'test --noinput -- --verbose --reuse-db', 'test_fw': 'pytest' }
 let g:quickrun_config['ruby.rspec']       = { 'command': 'rspec',      'cmdopt': '-f d'    }
 let g:quickrun_config['ruby.minitest']    = { 'command': 'ruby'                            }
 let g:quickrun_config['go.test']          = { 'command': 'go',         'cmdopt': 'test -v' }

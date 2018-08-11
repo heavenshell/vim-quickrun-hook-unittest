@@ -30,7 +30,6 @@ function! s:hook.on_finish(...)
       let name = substitute(&filetype, '\.', '_', 'g')
       call quickrunex#unittest#{name}#finish()
     catch
-      echomsg 'foo'
     endtry
   endif
 endfunction
