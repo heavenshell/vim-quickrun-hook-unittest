@@ -64,9 +64,8 @@ This plugin required awesome testing framework/runner to run.
 - JavaScript / TypeScript
   - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
   - [Jest - Delightful JavaScript Testing](http://facebook.github.io/jest/)
-- Rust
+- Rust(`cargo test`)
   - [Rust - Rust Programming Language](https://doc.rust-lang.org/stable/rust-by-example/testing.html)
-    - Rust does not need any testing framework/runner
 
 ## Example QuickRun configs
 
