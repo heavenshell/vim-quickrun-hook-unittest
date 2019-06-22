@@ -28,11 +28,16 @@ function! s:get_signeture()
   return line
 endfunction
 
+function! s:get_root() abort
+  let current_path = expand('%:p')
+  let root_path = finddir('node_modules', current_path . ';')
+  return root_path
+endfunction
+
 function! s:detect_bin()
   let jest = ''
   if executable('jest') == 0
-    let current_path = expand('%:p')
-    let root_path = finddir('node_modules', current_path . ';')
+    let root_path = s:get_root()
     let jest = root_path . '/.bin/jest'
   else
     let jest = exepath('jest')
@@ -64,6 +69,13 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
     let s:bin = s:detect_bin()
   endif
 
+  if exists('+autochdir') && &autochdir
+    let base = fnamemodify(s:get_root(), ':h')
+    let s:current = getcwd()
+    set noautochdir
+    execute ':lcd ' . base
+  endif
+
   let line = s:get_signeture()
   let file = expand('%:p')
 
@@ -80,6 +92,11 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
   let a:session['config']['command'] = s:bin
   let a:session['config']['cmdopt'] = cmdopt
   let a:session['config']['exec'] = ['%c %o %a']
+endfunction
+
+function! quickrunex#unittest#typescript_jest#finish()
+  set autochdir
+  execute ':lcd ' . s:current
 endfunction
 
 let &cpo = s:save_cpo
