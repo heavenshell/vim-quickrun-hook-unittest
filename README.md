@@ -1,5 +1,4 @@
-Quickrun hook for unittest
-==========================
+# Quickrun hook for unittest
 
 QuickRun hook for enable to unittest by selecting method.
 
@@ -19,8 +18,15 @@ class TestFoo(TestCase):
 QuickRun execute all tests.
 But if you want to run only `test_bar()` method.
 
-Install
--------
+### Python
+
+![Python](./assets/python.gif)
+
+### Jest
+
+![Jest](./assets/jest.gif)
+
+## Install
 
 Install the distributed files into Vim runtime directory which is usually
 ~/.vim/, or $HOME/vimfiles on Windows.
@@ -28,8 +34,7 @@ Install the distributed files into Vim runtime directory which is usually
 If you install pathogen that provided from Tim Pope, you should extract the
 file into 'bundle' directory.
 
-Usage
------
+## Usage
 
 1. Add below example to your .vimrc or _vimrc.
 
@@ -43,8 +48,7 @@ nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
 5. Type `,r` and then execute QuickRun automatically.
 6. QuickRun output only test_foo() test result.
 
-Test runners
-------------
+## Test runners
 
 This plugin required awesome testing framework/runner to run.
 
@@ -57,11 +61,15 @@ This plugin required awesome testing framework/runner to run.
 - Ruby
   - [RSpec: Ruby testing tool for Behaviour-Driven Development](http://rspec.info/)
   - [minitest/unit: a small and incredibly fast unit testing framework](https://github.com/seattlerb/minitest)
+- JavaScript / TypeScript
   - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
   - [Jest - Delightful JavaScript Testing](http://facebook.github.io/jest/)
+- Rust
+  - [Rust - Rust Programming Language](https://doc.rust-lang.org/stable/rust-by-example/testing.html)
+    - Rust does not need any testing framework/runner
 
-Example QuickRun configs
-------------------------
+## Example QuickRun configs
+
 
 ```viml
 augroup QuickRunUnitTest
@@ -82,12 +90,17 @@ let g:quickrun_config = {}
 let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
 let g:quickrun_config['python.unit']      = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
 let g:quickrun_config['python.pytest']    = { 'command': 'py.test',    'cmdopt': '-v'      }
+" Django unittest
 let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt: 'test --pararell=2 --keepdb -v2'}
 " pytest-django
-" let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt: 'test --noinput -- --verbose --reuse-db', 'test_fw': 'pytest' }
+" let g:quickrun_config['python.django']    = { 'command': 'python',   'cmdopt: 'test --noinput -- --verbose --reuse-db', 'test_fw': 'pytest' }
 let g:quickrun_config['ruby.rspec']       = { 'command': 'rspec',      'cmdopt': '-f d'    }
 let g:quickrun_config['ruby.minitest']    = { 'command': 'ruby'                            }
 let g:quickrun_config['go.test']          = { 'command': 'go',         'cmdopt': 'test -v' }
 let g:quickrun_config['javascript.mocha'] = { 'command': 'mocha' }
 let g:quickrun_config['javascript.mocha'] = { 'command': 'jest' }
 ```
+
+## LICENSE
+
+zlib License(Same as vim-quickrun)
