@@ -83,7 +83,10 @@ augroup QuickRunUnitTest
   autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
   autocmd BufWinEnter,BufNewFile *_test.go setlocal filetype=go.test
-  autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
+  " TypeScript support only Jest
+  autocmd BufWinEnter,BufNewFile *.spec.ts setlocal filetype=typescript.jest
+  " Choose Mocha or Jest
+  "autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
   "autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.jest
 augroup END
 let g:quickrun_config = {}
