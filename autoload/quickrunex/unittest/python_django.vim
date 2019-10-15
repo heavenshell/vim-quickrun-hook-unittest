@@ -56,14 +56,13 @@ function! quickrunex#unittest#python_django#run(session, context)
     let cmdopt = filepath
   endif
 
-  let a:session['config']['cmdopt'] = printf('%s %s', a:session['config']['cmdopt'], cmdopt)
-  let a:session['config']['command'] = file
+  let a:session['config']['cmdopt'] = printf('%s %s %s', file, a:session['config']['cmdopt'], cmdopt)
   let a:session['config']['exec'] = ['%c %o %a']
 endfunction
 
 function! quickrunex#unittest#python_django#finish()
   set autochdir
-  execute ':cd ' . s:current
+  execute ':lcd ' . s:current
 endfunction
 
 function! s:get_manage_py()
