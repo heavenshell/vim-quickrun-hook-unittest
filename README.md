@@ -18,6 +18,8 @@ class TestFoo(TestCase):
 QuickRun execute all tests.
 But if you want to run only `test_bar()` method.
 
+## Example
+
 ### Python
 
 ![Python](./assets/python.gif)
@@ -37,10 +39,9 @@ file into 'bundle' directory.
 ## Usage
 
 1. Add below example to your .vimrc or _vimrc.
-
-```viml
-nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
-```
+  ```viml
+  nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
+  ```
 
 2. Open your unittest file.
 3. Move cursor to test method scope.
@@ -69,15 +70,14 @@ This plugin required awesome testing framework/runner to run.
 
 ## Example QuickRun configs
 
-
 ```viml
 augroup QuickRunUnitTest
   autocmd!
   autocmd BufWinEnter,BufNewFile *test.php setlocal filetype=php.unit
   " Choose UnitTest, py.test or Django.
   autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.unit
-  "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.pytest
-  "autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.django
+  " autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.pytest
+  " autocmd BufWinEnter,BufNewFile test_*.py setlocal filetype=python.django
   autocmd BufWinEnter,BufNewFile *.t       setlocal filetype=perl.unit
   autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
   autocmd BufWinEnter,BufNewFile *_test.rb setlocal filetype=ruby.minitest
@@ -85,22 +85,23 @@ augroup QuickRunUnitTest
   " TypeScript support only Jest
   autocmd BufWinEnter,BufNewFile *.spec.ts setlocal filetype=typescript.jest
   " Choose Mocha or Jest
-  "autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
-  "autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.jest
+  " autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
+  " autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.jest
 augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
 let g:quickrun_config['python.unit']      = { 'command': 'nosetests',  'cmdopt': '-v -s'   }
 let g:quickrun_config['python.pytest']    = { 'command': 'py.test',    'cmdopt': '-v'      }
 " Django unittest
-let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt: 'test --pararell=2 --keepdb -v2'}
+let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt': 'test --pararell=2 --keepdb -v2'}
 " pytest-django
-" let g:quickrun_config['python.django']    = { 'command': 'python',   'cmdopt: 'test --noinput -- --verbose --reuse-db', 'test_fw': 'pytest' }
+" let g:quickrun_config['python.django']    = { 'command': 'python',     'cmdopt': 'test --noinput -- --verbose --reuse-db', 'test_fw': 'pytest' }
 let g:quickrun_config['ruby.rspec']       = { 'command': 'rspec',      'cmdopt': '-f d'    }
 let g:quickrun_config['ruby.minitest']    = { 'command': 'ruby'                            }
 let g:quickrun_config['go.test']          = { 'command': 'go',         'cmdopt': 'test -v' }
+let g:quickrun_config['typescript.jest']  = { 'command': 'jest'  }
 let g:quickrun_config['javascript.mocha'] = { 'command': 'mocha' }
-let g:quickrun_config['javascript.mocha'] = { 'command': 'jest' }
+let g:quickrun_config['javascript.jest']  = { 'command': 'jest'  }
 ```
 
 ## LICENSE
