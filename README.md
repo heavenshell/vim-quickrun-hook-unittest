@@ -33,7 +33,7 @@ But if you want to run only `test_bar()` method.
 Install the distributed files into Vim runtime directory which is usually
 ~/.vim/, or $HOME/vimfiles on Windows.
 
-If you install pathogen that provided from Tim Pope, you should extract the
+If you install pathogen provided by Tim Pope, you should extract the
 file into 'bundle' directory.
 
 ## Usage
