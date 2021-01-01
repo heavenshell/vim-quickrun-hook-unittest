@@ -59,7 +59,7 @@ function! quickrunex#unittest#rust#run(session, context)
   let pattern = s:pick_name(line)
 
   let cmd = 'cargo'
-  let cmdopt = printf('%s -- --ignored --nocapture', pattern)
+  let cmdopt = printf('%s -- --nocapture', pattern)
 
   let a:session['config']['command'] = cmd
   let a:session['config']['cmdopt'] = cmdopt
