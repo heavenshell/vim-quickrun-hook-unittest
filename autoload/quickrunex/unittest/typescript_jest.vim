@@ -39,6 +39,12 @@ function! s:detect_bin()
   if executable('jest') == 0
     let root_path = s:get_root()
     let jest = root_path . '/.bin/jest'
+    if filereadable(jest) == 0
+      let root = findfile('lerna.json', expand('%:p') . ';')
+      if root != ''
+        let jest = printf('%s/node_modules/.bin/jest', fnamemodify(root, ':h'))
+      endif
+    endif
   else
     let jest = exepath('jest')
     if jest == ''
@@ -56,7 +62,6 @@ function! s:coverage()
   endif
 
   return ' --coverage=!' . s:src_path . '*/**.js'
-
 endfunction
 
 function! s:pick_name(string)
