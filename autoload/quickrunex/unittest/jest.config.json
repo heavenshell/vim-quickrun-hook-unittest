@@ -1,0 +1,14 @@
+{
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "testURL": "http://localhost/",
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  }
+}

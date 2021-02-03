@@ -104,6 +104,16 @@ let g:quickrun_config['javascript.mocha'] = { 'command': 'mocha' }
 let g:quickrun_config['javascript.jest']  = { 'command': 'jest'  }
 ```
 
+### Extra config
+
+If you using jest in monorepo(lerna) and enable autochdir, you can set jest.config.
+
+```console
+let g:quickrun_hook_unittest_enable_jest_config = 1
+" If you don't set below path, default jest.config.json was used.
+let g:quickrun_hook_unittest_jest_config_path = '/path/to/jest.config.json
+```
+
 ## LICENSE
 
 zlib License(Same as vim-quickrun)

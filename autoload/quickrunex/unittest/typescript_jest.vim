@@ -8,6 +8,10 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:jest_config_path = printf('%s/jest.config.json', expand('<sfile>:p:h'))
+let g:quickrun_hook_unittest_enable_jest_config = get(g:, 'quickrun_hook_unittest_enable_jest_config', 0)
+let g:quickrun_hook_unittest_jest_config_path = get(g:, 'quickrun_hook_unittest_jest_config_path', s:jest_config_path)
+
 let s:bin = ''
 let s:current_path = ''
 let s:src_path = ''
@@ -26,6 +30,14 @@ function! s:get_signeture()
     endif
   endif
   return line
+endfunction
+
+function! s:get_monorepo_root() abort
+  let root = findfile('lerna.json', expand('%:p') . ';')
+  if root != ''
+    return fnamemodify(root, ':h')
+  endif
+  return ''
 endfunction
 
 function! s:get_root() abort
@@ -73,9 +85,18 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
   if s:bin == ''
     let s:bin = s:detect_bin()
   endif
-
+  let rootDir = ''
   if exists('+autochdir') && &autochdir
-    let base = fnamemodify(s:get_root(), ':h')
+    let monorepo_root = s:get_monorepo_root()
+    if monorepo_root == ''
+      let base = fnamemodify(s:get_root(), ':h')
+    else
+      let base = monorepo_root
+      let rootDir = printf(' --rootDir=%s', base)
+      if g:quickrun_hook_unittest_enable_jest_config == 1
+        let rootDir = rootDir . printf(' -c=%s', g:quickrun_hook_unittest_jest_config_path)
+      endif
+    endif
     let s:current = getcwd()
     set noautochdir
     execute ':lcd ' . base
@@ -93,6 +114,9 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
   endi
   let cmdopt .= s:coverage()
   " let cmdopt = cmdopt . ' --clearCache'
+  if rootDir != ''
+    let cmdopt = cmdopt . rootDir
+  endif
 
   let a:session['config']['command'] = s:bin
   let a:session['config']['cmdopt'] = cmdopt
