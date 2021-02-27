@@ -65,6 +65,7 @@ This plugin required awesome testing framework/runner to run.
 - JavaScript / TypeScript
   - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
   - [Jest - Delightful JavaScript Testing](http://facebook.github.io/jest/)
+  - [Deno](https://deno.land/manual/testing)
 - Rust(`cargo test`)
   - [Rust - Rust Programming Language](https://doc.rust-lang.org/stable/rust-by-example/testing.html)
 
@@ -87,6 +88,8 @@ augroup QuickRunUnitTest
   " Choose Mocha or Jest
   " autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.mocha
   " autocmd BufWinEnter,BufNewFile *.test.js setlocal filetype=javascript.jest
+  autocmd BufWinEnter,BufNewFile *test.ts setlocal filetype=typescript.deno
+  autocmd BufWinEnter,BufNewFile *test.tsx setlocal filetype=typescript.deno
 augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['php.unit']         = { 'command': 'testrunner', 'cmdopt': 'phpunit' }
