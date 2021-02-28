@@ -64,7 +64,7 @@ function! quickrunex#unittest#typescript_deno#run(session, context)
 
   let a:session['config']['command'] = s:bin
 
-  let a:session['config']['cmdopt'] = ' test --allow-all --no-check ' . cmdopt
+  let a:session['config']['cmdopt'] = ' test --allow-all ' . cmdopt
   let a:session['config']['exec'] = ['%c %o %a']
 endfunction
 
