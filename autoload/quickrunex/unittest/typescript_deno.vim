@@ -13,15 +13,30 @@ let s:bin = ''
 function! s:get_signeture()
   let line = getline('.')
 
-  if line !~# 'test('
-    if line =~# '*@'
-      let pos = search('test(', 'Wn')
-      let line = getline(pos)
-    else
-      let pos = search('test(', 'bWn')
-      let line = getline(pos)
-    endif
+  if line =~# '\(Deno.\)\?test'
+    " Same line
+    return line
   endif
+
+  let pos = search('\(Deno.\)\?test', 'bWn')
+  if pos ==# 0
+    return line
+  endif
+
+  let patterns = [
+    \ 'test(".*"',
+    \ "test('.*'",
+    \ 'name:\s*\(".*"\)',
+    \ "name:\s*\('.*'\)",
+    \ ]
+  let line = ''
+  for pattern in patterns
+    let pos = search(pattern, 'bWn')
+    if pos != 0
+      let line = getline(pos)
+      break
+    endif
+  endfor
   return line
 endfunction
 
@@ -63,7 +78,6 @@ function! quickrunex#unittest#typescript_deno#run(session, context)
   endif
 
   let a:session['config']['command'] = s:bin
-
   let a:session['config']['cmdopt'] = ' test --allow-all ' . cmdopt
   let a:session['config']['exec'] = ['%c %o %a']
 endfunction
