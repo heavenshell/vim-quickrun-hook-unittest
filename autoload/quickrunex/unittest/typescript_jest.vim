@@ -11,6 +11,7 @@ set cpo&vim
 let s:jest_config_path = printf('%s/jest.config.json', expand('<sfile>:p:h'))
 let g:quickrun_hook_unittest_enable_jest_config = get(g:, 'quickrun_hook_unittest_enable_jest_config', 0)
 let g:quickrun_hook_unittest_jest_config_path = get(g:, 'quickrun_hook_unittest_jest_config_path', s:jest_config_path)
+let g:quickrun_hook_unittest_jest_test_environment = get(g:, 'quickrun_hook_unittest_jest_test_environment', 'jsdom')
 
 let s:bin = ''
 let s:current_path = ''
@@ -93,8 +94,11 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
     else
       let base = monorepo_root
       let rootDir = printf(' --rootDir=%s', base)
-      if g:quickrun_hook_unittest_enable_jest_config == 1
+      if g:quickrun_hook_unittest_enable_jest_config ==# 1
         let rootDir = rootDir . printf(' -c=%s', g:quickrun_hook_unittest_jest_config_path)
+      endif
+      if g:quickrun_hook_unittest_jest_test_environment !=# ''
+        let rootDir = printf('%s --testEnvironment=%s', rootDir, g:quickrun_hook_unittest_jest_test_environment)
       endif
     endif
     let s:current = getcwd()

@@ -38,7 +38,8 @@ file into 'bundle' directory.
 
 ## Usage
 
-1. Add below example to your .vimrc or _vimrc.
+1. Add below example to your `.vimrc` or `_vimrc`.
+
   ```viml
   nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
   ```
@@ -116,6 +117,17 @@ let g:quickrun_hook_unittest_enable_jest_config = 1
 " If you don't set below path, default jest.config.json was used.
 let g:quickrun_hook_unittest_jest_config_path = '/path/to/jest.config.json
 ```
+
+Since Jest v27, default testEnvironment was changed from `jsdom` to `node`.
+QuickRunUnitTest keep backward compatible with previous behaviour as `jsdom`.
+
+If you want change to node, you can set like following.
+
+```console
+let g:quickrun_hook_unittest_jest_test_environment = 'node'
+```
+
+This option is affect only jest in monorepo(lerna) and enable autochdir.
 
 ## LICENSE
 
