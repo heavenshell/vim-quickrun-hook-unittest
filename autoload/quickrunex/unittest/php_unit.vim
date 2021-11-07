@@ -1,6 +1,6 @@
 " File: php_unit.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run Stagehand_TestRunner(PHP test runner I/F)'s selecting tests.
 " Link: See http://piece-framework.com/projects/stagehand-testrunner/wiki

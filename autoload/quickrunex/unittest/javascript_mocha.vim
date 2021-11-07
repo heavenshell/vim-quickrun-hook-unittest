@@ -1,6 +1,6 @@
 " File: javascript_mocha.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run Mocha selecting tests.
 " Link: See https://mochajs.org/#g---grep-pattern

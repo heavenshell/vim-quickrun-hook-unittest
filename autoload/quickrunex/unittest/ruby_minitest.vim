@@ -1,6 +1,6 @@
 " File: ruby_minitest.vim
 " Author: BimbaLaszlo <bimbalaszlo@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run Ruby minitest testing tool unit test's selecting tests.
 " Link: See https://github.com/seattlerb/minitest
