@@ -1,6 +1,6 @@
 " File: typescript_deno.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run deno selecting tests.
 " Link: See https://deno.land/manual/testing#filtering

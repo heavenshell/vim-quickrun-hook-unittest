@@ -1,6 +1,6 @@
 " File: typescript_jest.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run Jest selecting tests.
 " Link: See http://facebook.github.io/jest/docs/en/cli.html#testpathpattern-regex

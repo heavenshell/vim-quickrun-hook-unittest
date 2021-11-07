@@ -40,7 +40,7 @@ file into 'bundle' directory.
 
 1. Add below example to your `.vimrc` or `_vimrc`.
 
-  ```viml
+  ```vim
   nnoremap <silent> ,r :QuickRun -mode n -runner job -hook/unittest/enable 1<CR>
   ```
 
@@ -70,9 +70,83 @@ This plugin required awesome testing framework/runner to run.
 - Rust(`cargo test`)
   - [Rust - Rust Programming Language](https://doc.rust-lang.org/stable/rust-by-example/testing.html)
 
-## Example QuickRun configs
+## Example Quickrun configs(recommend)
 
-```viml
+```vim
+let g:quickrun_unittest_config = {
+  \ 'typescript': {
+  \   '.spec.ts\%[x]': {  " *.spec.ts or *.spec.tsx run jest
+  \     'ft': 'typescript.jest',
+  \     'config': {'command': 'jest'},
+  \   },
+  \   'test.ts\%[x]': {  " *_test.ts or *_test.tsx run Deno's test
+  \     'ft': 'typescript.deno',
+  \     'config': {'command': 'deno'},
+  \   },
+  \   '.spec.js': {      " *.spec.js run mocha
+  \     'ft': 'typescript.mocha',
+  \     'config': {'command': 'mocha'},
+  \   },
+  \ },
+  \ 'python': {
+  \   'test_[A-z0-9_.]*.py': {
+  \     'ft': 'python.unit',
+  \     'config': {'command': 'nosetests', 'cmdopt': '-v -s -d'},
+  \   },
+  \   'tests.py': {
+  \     'ft': 'python.unit',
+  \     'config': {'command': 'nosetests', 'cmdopt': '-v -s -d'},
+  \   },
+  \ },
+  \ 'php': {
+  \   'test.php': {
+  \     'ft': 'php.unit',
+  \     'config': {'command': 'testrunner', 'cmdopt': 'phpunit'},
+  \   },
+  \ },
+  \ 'perl': {
+  \   '.t': {
+  \     'ft': 'perl.unit',
+  \     'config': {'command': 'prove'},
+  \   },
+  \ },
+  \ 'ruby': {
+  \   '_spec.rb': {
+  \     'ft': 'ruby.rspec',
+  \     'config': {'command': 'rspec', 'cmdopt': '-f d'},
+  \   },
+  \ },
+  \ 'go': {
+  \   '_test.go': {
+  \     'ft': 'go.test',
+  \     'config': {'command': 'go', 'cmdopt': 'test -v', 'exec': ['%c %o %a'] },
+  \   },
+  \ }}
+
+
+" You can describe like followings
+let config = {
+  \ 'ft': 'python.django',
+  \ 'config': {
+  \   'command': 'python',
+  \   'cmdopt': 'test -v 2 --keepdb',
+  \   'root': 1,
+  \   'test_fw': 'unittest',
+  \ }}
+let g:quickrun_unittest_config['python'] = {
+  \ 'test_[A-z0-9_.]*.py': config,
+  \ 'tests.py': config,
+  \ }
+```
+
+- Key of g:quickrun_unittest_config is filetype
+- Key of filetype is file name pattern
+- Value of ft is Quickrun unittest's file name
+- Value of config is Quickrun's command
+
+## Example QuickRun configs(multiple filetypes)
+
+```vim
 augroup QuickRunUnitTest
   autocmd!
   autocmd BufWinEnter,BufNewFile *test.php setlocal filetype=php.unit
@@ -112,7 +186,7 @@ let g:quickrun_config['javascript.jest']  = { 'command': 'jest'  }
 
 If you using jest in monorepo(lerna) and enable autochdir, you can set jest.config.
 
-```console
+```vim
 let g:quickrun_hook_unittest_enable_jest_config = 1
 " If you don't set below path, default jest.config.json was used.
 let g:quickrun_hook_unittest_jest_config_path = '/path/to/jest.config.json
@@ -123,7 +197,7 @@ QuickRunUnitTest keep backward compatible with previous behaviour as `jsdom`.
 
 If you want change to node, you can set like following.
 
-```console
+```vim
 let g:quickrun_hook_unittest_jest_test_environment = 'node'
 ```
 

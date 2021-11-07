@@ -1,6 +1,6 @@
 " File: python_pytest.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version: 0.0.1
+" Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
 " Description: Run Python unittest testing tool py.test's selecting tests.
 " Link: See http://pytest.org/latest/
