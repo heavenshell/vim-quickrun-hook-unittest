@@ -34,6 +34,11 @@ function! s:get_signeture()
 endfunction
 
 function! s:get_monorepo_root() abort
+  let root = findfile('pnpm-workspace.yaml', expand('%:p') . ';')
+  if root != ''
+    return fnamemodify(root, ':h')
+  endif
+  return ''
   let root = findfile('lerna.json', expand('%:p') . ';')
   if root != ''
     return fnamemodify(root, ':h')
@@ -53,6 +58,11 @@ function! s:detect_bin()
     let root_path = s:get_root()
     let jest = root_path . '/.bin/jest'
     if filereadable(jest) == 0
+      let root = findfile('pnpm-workspace.yaml', expand('%:p') . ';')
+      if root != ''
+        let jest = printf('%s/node_modules/.bin/jest', fnamemodify(root, ':h'))
+      endif
+
       let root = findfile('lerna.json', expand('%:p') . ';')
       if root != ''
         let jest = printf('%s/node_modules/.bin/jest', fnamemodify(root, ':h'))
