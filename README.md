@@ -57,7 +57,7 @@ This plugin required awesome testing framework/runner to run.
 - Python
   - [nose(Python unittesting framework)](http://nose.readthedocs.org/en/latest/)
   - [py.test(Python unittesting framework)](http://pytest.org/latest/index.html)
-  - [Django](https://docs.djangoproject.com/en/1.10/topics/testing/overview/#running-tests)
+  - [Django](https://docs.djangoproject.com/en/dev/topics/testing/overview/#running-tests)
 - PHP
   - [Stagehand_TestRunner:PHP continuous test runner](http://piece-framework.com/projects/stagehand-testrunner/wiki)
 - Ruby
@@ -66,6 +66,7 @@ This plugin required awesome testing framework/runner to run.
 - JavaScript / TypeScript
   - [Mocha - the fun, simple, flexible JavaScript test framework](https://mochajs.org)
   - [Jest - Delightful JavaScript Testing](http://facebook.github.io/jest/)
+  - [vitest - Next generation testing framework powered by Vite](https://vitest.dev/)
   - [Deno](https://deno.land/manual/testing)
 - Rust(`cargo test`)
   - [Rust - Rust Programming Language](https://doc.rust-lang.org/stable/rust-by-example/testing.html)

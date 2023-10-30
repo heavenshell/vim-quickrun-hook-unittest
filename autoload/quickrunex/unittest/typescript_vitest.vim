@@ -1,17 +1,17 @@
-" File: typescript_jest.vim
+" File: typescript_vitest.vim
 " Author: Shinya Ohyanagi <sohyanagi@gmail.com>
 " Version: 1.0.0
 " WebPage: http://github.com/heavenshell/vim-quickrun-unittest/
-" Description: Run Jest selecting tests.
-" Link: See http://facebook.github.io/jest/docs/en/cli.html#testpathpattern-regex
+" Description: Run vitest selecting tests.
+" Link: See https://vitest.dev/guide/cli.html#options
 " License: zlib License
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:jest_config_path = printf('%s/jest.config.json', expand('<sfile>:p:h'))
-let g:quickrun_hook_unittest_enable_jest_config = get(g:, 'quickrun_hook_unittest_enable_jest_config', 0)
-let g:quickrun_hook_unittest_jest_config_path = get(g:, 'quickrun_hook_unittest_jest_config_path', s:jest_config_path)
-let g:quickrun_hook_unittest_jest_test_environment = get(g:, 'quickrun_hook_unittest_jest_test_environment', 'jsdom')
+let s:vitest_config_path = printf('%s/vitest.config.ts', expand('<sfile>:p:h'))
+let g:quickrun_hook_unittest_enable_vitest_config = get(g:, 'quickrun_hook_unittest_enable_vitest_config', 0)
+let g:quickrun_hook_unittest_vitest_config_path = get(g:, 'quickrun_hook_unittest_vitest_config_path', s:vitest_config_path)
+let g:quickrun_hook_unittest_vitest_dom = get(g:, 'quickrun_hook_unittest_vitest_dom', 'jsdom')
 
 let s:bin = ''
 let s:current_path = ''
@@ -53,38 +53,29 @@ function! s:get_root() abort
 endfunction
 
 function! s:detect_bin()
-  let jest = ''
-  if executable('jest') == 0
+  let vitest = ''
+  if executable('vitest') == 0
     let root_path = s:get_root()
-    let jest = root_path . '/.bin/jest'
-    if filereadable(jest) == 0
+    let vitest = root_path . '/.bin/vitest'
+    if filereadable(vitest) == 0
       let root = findfile('pnpm-workspace.yaml', expand('%:p') . ';')
       if root != ''
-        let jest = printf('%s/node_modules/.bin/jest', fnamemodify(root, ':h'))
+        let vitest = printf('%s/node_modules/.bin/vitest', fnamemodify(root, ':h'))
       endif
 
       let root = findfile('lerna.json', expand('%:p') . ';')
       if root != ''
-        let jest = printf('%s/node_modules/.bin/jest', fnamemodify(root, ':h'))
+        let vitest = printf('%s/node_modules/.bin/vitest', fnamemodify(root, ':h'))
       endif
     endif
   else
-    let jest = exepath('jest')
-    if jest == ''
+    let vitest = exepath('vitest')
+    if vitest == ''
       return ''
     endif
   endif
 
-  return jest
-endfunction
-
-function! s:coverage()
-  if s:src_path == ''
-    let current_path = expand('%:p')
-    let s:src_path = finddir('src', current_path . ';')
-  endif
-
-  return ' --coverage=!' . s:src_path . '*/**.js'
+  return vitest
 endfunction
 
 function! s:pick_name(string)
@@ -92,7 +83,7 @@ function! s:pick_name(string)
   return name
 endfunction
 
-function! quickrunex#unittest#typescript_jest#run(session, context)
+function! quickrunex#unittest#typescript_vitest#run(session, context)
   if s:bin == ''
     let s:bin = s:detect_bin()
   endif
@@ -104,11 +95,11 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
     else
       let base = monorepo_root
       let rootDir = printf(' --rootDir=%s', base)
-      if g:quickrun_hook_unittest_enable_jest_config ==# 1
-        let rootDir = rootDir . printf(' -c=%s', g:quickrun_hook_unittest_jest_config_path)
+      if g:quickrun_hook_unittest_enable_vitest_config ==# 1
+        let rootDir = rootDir . printf(' -c=%s', g:quickrun_hook_unittest_vitest_config_path)
       endif
-      if g:quickrun_hook_unittest_jest_test_environment !=# ''
-        let rootDir = printf('%s --testEnvironment=%s', rootDir, g:quickrun_hook_unittest_jest_test_environment)
+      if g:quickrun_hook_unittest_vitest_dom !=# ''
+        let rootDir = printf('%s --dom=%s', rootDir, g:quickrun_hook_unittest_vitest_dom)
       endif
     endif
     let s:current = getcwd()
@@ -126,18 +117,16 @@ function! quickrunex#unittest#typescript_jest#run(session, context)
     let pattern = s:pick_name(line)
     let cmdopt = ' -t ' . pattern . ' ' . file
   endi
-  let cmdopt .= s:coverage()
-  " let cmdopt = cmdopt . ' --clearCache'
   if rootDir != ''
     let cmdopt = cmdopt . rootDir
   endif
 
   let a:session['config']['command'] = s:bin
-  let a:session['config']['cmdopt'] = cmdopt
+  let a:session['config']['cmdopt'] .= cmdopt
   let a:session['config']['exec'] = ['%c %o %a']
 endfunction
 
-function! quickrunex#unittest#typescript_jest#finish()
+function! quickrunex#unittest#typescript_vitest#finish()
   set autochdir
   execute ':lcd ' . s:current
 endfunction
