@@ -11,7 +11,7 @@ set cpo&vim
 let s:vitest_config_path = printf('%s/vitest.config.ts', expand('<sfile>:p:h'))
 let g:quickrun_hook_unittest_enable_vitest_config = get(g:, 'quickrun_hook_unittest_enable_vitest_config', 0)
 let g:quickrun_hook_unittest_vitest_config_path = get(g:, 'quickrun_hook_unittest_vitest_config_path', s:vitest_config_path)
-let g:quickrun_hook_unittest_vitest_dom = get(g:, 'quickrun_hook_unittest_vitest_dom', 'jsdom')
+let g:quickrun_hook_unittest_vitest_dom = get(g:, 'quickrun_hook_unittest_vitest_dom', '')
 
 let s:bin = ''
 let s:current_path = ''
@@ -94,7 +94,7 @@ function! quickrunex#unittest#typescript_vitest#run(session, context)
       let base = fnamemodify(s:get_root(), ':h')
     else
       let base = monorepo_root
-      let rootDir = printf(' --rootDir=%s', base)
+      let rootDir = printf(' --root=%s', base)
       if g:quickrun_hook_unittest_enable_vitest_config ==# 1
         let rootDir = rootDir . printf(' -c=%s', g:quickrun_hook_unittest_vitest_config_path)
       endif

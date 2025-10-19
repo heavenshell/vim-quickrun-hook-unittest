@@ -64,7 +64,15 @@ endfunction
 function! s:hook.on_finish(session, context)
   if self.config.enable == 1
     try
-      let name = substitute(&filetype, '\.', '_', 'g')
+      let config = get(g:, 'quickrun_unittest_config', {})
+      let name = ''
+      if empty(config) || !has_key(config, &filetype)
+        let name = substitute(&filetype, '\.', '_', 'g')
+      else
+        let configs = s:get_unittest_name(a:session['config']['srcfile'])
+        let name = substitute(configs['ft'], '\.', '_', 'g')
+      endif
+
       call quickrunex#unittest#{name}#finish()
     catch
     endtry
